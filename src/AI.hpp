@@ -4,18 +4,20 @@
 #include "Game.hpp"
 
 typedef int Score;
-constexpr Score SCORE_MAX = 1000;
+constexpr Score SCORE_MAX = 1000; // SCORE_MIN is just -SCORE_MAX.  :)
 
 // An evaluation function is expected to return a value from -1000 to 1000,
 // where 1000 is a win for symbol and -1000 is a loss for symbol.
 typedef Score Evaluator(const GameState& state, Symbol symbol);
 
 Evaluator defaultEvaluator; // Follows the formula specified in the assignment.
-Evaluator improvedEvaluator; // Evaluates by counting lines that aren't blocked by the opponent.
+Evaluator improvedEvaluator; // Evaluates by counting "candidate lines."  See readme for justification.
 
+// Returned by calls to minimax().  We need a struct to hold all the metadata
+// that it comes back with.
 struct MinimaxResult
 {
-	// The worst-case score for the examined node.	
+	// The worst-case score for the examined node, assuming both players play their best.
 	Score score = 0;
 	
 	// Whether or not the depth limit prevented any nodes from being generated.

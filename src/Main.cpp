@@ -86,7 +86,7 @@ int main()
 	glClearColor(DARK_GRAY.red, DARK_GRAY.green, DARK_GRAY.blue, 1.0f);	
 	setViewport(window);
 	
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe.
 	
 	auto state = State::DIFFICULTY_SELECTION;
 	unsigned int difficultyLevel = 0;
@@ -148,6 +148,7 @@ int main()
 				}
 			}
 			
+			// Draw difficulty selection bars.
 			drawPie(shaderProgram, GREEN, {-0.25, 0.25}, 0.0625, 0.0, PI*2);
 			drawPie(shaderProgram, YELLOW, {-0.25, 0.0}, 0.0625, 0.0, PI*2);
 			drawPie(shaderProgram, YELLOW, {0.0, 0.0}, 0.0625, 0.0, PI*2);
@@ -158,7 +159,7 @@ int main()
 		
 		else if (state == State::SYMBOL_SELECTION)
 		{
-			if (mouse.in({-0.75, -0.25}, {-0.25, 0.25}))
+			if (mouse.in({-0.75, -0.25}, {-0.25, 0.25})) // Over left (X) side.
 			{
 				drawRectangle(shaderProgram, LIGHT_GRAY, {-0.75, -0.25}, {-0.25, 0.25});
 				if (mouseReleased)
@@ -168,7 +169,7 @@ int main()
 				}
 			}
 			
-			if (mouse.in({0.75, 0.25}, {0.25, -0.25}))
+			if (mouse.in({0.75, 0.25}, {0.25, -0.25})) // Over right (O) side.
 			{
 				drawRectangle(shaderProgram, LIGHT_GRAY, {0.75, 0.25}, {0.25, -0.25});
 				if (mouseReleased)
