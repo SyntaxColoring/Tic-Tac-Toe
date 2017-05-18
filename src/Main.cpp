@@ -235,6 +235,12 @@ int main()
 			if (gameState.winner() == playerSymbol) gridColor = GREEN;
 			else if (gameState.winner() == opponentOf(playerSymbol)) gridColor = RED;
 			drawGame(shaderProgram, gameState, gridColor);
+			
+			if (mouseReleased)
+			{
+				gameState = GameState();
+				state = State::DIFFICULTY_SELECTION;
+			}
 		}
 		
 		SDL_GL_SwapWindow(window);
