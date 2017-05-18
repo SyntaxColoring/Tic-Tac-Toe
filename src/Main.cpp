@@ -118,6 +118,11 @@ int main()
 				case SDL_QUIT:
 					done = true;
 					break;
+                case SDL_KEYDOWN:
+                    if (event.key.keysym.sym == 'r') {
+                        state = State::DIFFICULTY_SELECTION;
+                    }
+                    break;
 			}
 		}
 		
