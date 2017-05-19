@@ -29,7 +29,7 @@ namespace
 		int width, height;
 		SDL_GetMouseState(&x, &y);
 		SDL_GL_GetDrawableSize(window, &width, &height);
-		return {(float)x/width*2-1, (float)y/width*-2+1};
+		return {(float)x/width*2-1, (float)y/height*-2+1};
 	}
 
 	enum class State
