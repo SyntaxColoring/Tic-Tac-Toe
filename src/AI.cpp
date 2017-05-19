@@ -63,7 +63,7 @@ MinimaxResult minimax(const GameState& state,
 	
 	const auto ourActions = state.possibleActionsFor(symbol);
 	
-	if (maximumDepth == 0 || ourActions.empty()) // This is either a leaf node or we've reached the cutoff point.
+	if (maximumDepth == 0 || state.terminal() || ourActions.empty()) // This is either a leaf node or we've reached the cutoff point.
 	{
 		result.score = evaluate(state, symbol);
 		result.cutOff = !ourActions.empty(); // It doesn't count as a cutoff if there are no child nodes, anyway.
@@ -128,9 +128,8 @@ Action findBestAction(const GameState& state, Evaluator evaluate, const Symbol s
 		for (const auto& candidateAction: actions)
 		{
 			const GameState candidateState = state.apply(candidateAction);
-			MinimaxResult candidateResult = minimax(candidateState, evaluate, opponentOf(symbol), maximumDepth, -SCORE_MAX, SCORE_MAX);
+			MinimaxResult candidateResult = minimax(candidateState, evaluate, opponentOf(symbol), maximumDepth, -SCORE_MAX, -score);
 			candidateResult.score *= -1;
-			
 			cutOff |= candidateResult.cutOff;
 			maximumDepthReached = std::max(maximumDepth, candidateResult.maximumDepth+1);
 			nodeCount += candidateResult.nodeCount;
