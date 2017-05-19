@@ -54,11 +54,11 @@ int main()
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 	
 	SDL_Window* window = SDL_CreateWindow("Tic-Tac-Toe",
-	                                      SDL_WINDOWPOS_CENTERED,
-	                                      SDL_WINDOWPOS_CENTERED,
-	                                      480,
-	                                      480,
-	                                      SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE);
+										  SDL_WINDOWPOS_CENTERED,
+										  SDL_WINDOWPOS_CENTERED,
+										  480,
+										  480,
+										  SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE);
 	
 	if (!window)
 		throw std::runtime_error(std::string("Error creating window: ") + SDL_GetError());
@@ -117,6 +117,11 @@ int main()
 					break;
 				case SDL_QUIT:
 					done = true;
+					break;
+				case SDL_KEYDOWN:
+					if (event.key.keysym.sym == 'r') {
+						state = State::DIFFICULTY_SELECTION;
+					}
 					break;
 			}
 		}
